@@ -1,0 +1,346 @@
+*,
+::before,
+::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font: inherit;
+}
+
+:root{
+
+    /*Colors*/
+
+    /*===Theme 1===*/
+
+    /*Backgrounds*/
+    --clr-bg-main: hsl(222, 26%, 31%);
+    --clr-bg-keypad: hsl(223, 31%, 20%);
+    --clr-bg-screen: hsl(224, 36%, 15%);
+
+    /*Keys*/
+    --clr-k-bg-spec: hsl(225, 21%, 49%);
+    --clr-k-shadow-spec: hsl(224, 28%, 35%);
+    --clr-k-bg-toggle: hsl(6, 63%, 50%);
+    --clr-k-shadow-eq: hsl(6, 70%, 34%);
+    --clr-k-bg: hsl(30, 25%, 89%);
+    --clr-k-shadow: hsl(28, 16%, 65%);
+
+    /*Text*/
+    --clr-txt-blue: hsl(221, 14%, 31%);
+    --clr-txt-white: hsl(0, 0%, 100%);
+
+
+    /*===Theme 2===*/
+
+    /*Backgrounds*/
+    --clr-tt-bg-main: hsl(0, 0%, 90%);
+    --clr-tt-bg-keypad: hsl(0, 5%, 81%);
+    --clr-tt-bg-screen: hsl(0, 0%, 93%);
+
+    /*Keys*/
+    --clr-tt-k-bg-spec: hsl(185, 42%, 37%);
+    --clr-tt-k-shadow-spec: hsl(185, 58%, 25%);
+    --clr-tt-k-bg-toggle: hsl(25, 98%, 40%);
+    --clr-tt-k-shadow-eq: hsl(25, 99%, 27%);
+    --clr-tt-k-bg: hsl(45, 7%, 89%);
+    --clr-tt-k-shadow: hsl(35, 11%, 61%);
+
+    /*Text*/
+    --clr-tt-txt-blue: hsl(60, 10%, 19%);
+    --clr-tt-txt-white: hsl(0, 0%, 100%);
+
+    /*Fonts*/
+
+    --ff: 'League Spartan', sans-serif;
+    --fw-700: 700;
+
+    /*Font sizes*/
+    --fs-100: 0.75rem;
+    --fs-200: 1rem;
+    --fs-250: 1.5rem;
+    --fs-300: 2rem;
+}
+
+/* ======Utility classes====== */
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-row{
+    display: flex;
+    align-items: flex-end;
+}
+
+.grid{
+    display: grid;
+    grid-area: 1 / 1 / 5 / 4;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    row-gap: 1rem;
+    column-gap: 0.3rem;
+}
+
+/*======Typography======*/
+
+.display,
+.delete,
+.clear,
+.equals{
+    color: var(--clr-txt-white);
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+
+
+.number,
+.operator{
+    color: var(--clr-txt-blue);
+}
+
+.container.active .number,
+.container.active .operator,
+.container.active .display{
+    color: var(--clr-tt-txt-blue);
+}
+
+.display > span{
+    font-size: var(--fs-300);
+    text-align: end;
+    max-width: 100%;
+    height: 50%;
+}
+
+.head{
+    color: var(--clr-txt-white);
+    text-align: center;
+}
+
+.container.active .head{
+    color: var(--clr-tt-txt-blue);
+}
+
+h1{
+    text-transform: lowercase;
+}
+
+span {
+    text-transform: uppercase;
+    font-size: var(--fs-100);
+    letter-spacing: 1px;
+}
+/*======General layout======*/
+
+body{
+    font-family: var(--ff);
+    font-size: var(--fs-300);
+    font-weight: var(--fw-700);
+    min-height: 100vh;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    padding: 1.5rem;
+    gap: 2rem;
+    background-color: var(--clr-bg-main);
+}
+
+.container.active{
+    background-color: var(--clr-tt-bg-main);
+}
+
+
+
+.head{
+    min-width: 100%;
+    justify-content: space-between;
+}
+
+.display{
+    width: 100%;
+    height: 100px;
+    background-color: var(--clr-bg-screen);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    align-items: flex-end;
+}
+
+.container.active .display{
+    background-color: var(--clr-tt-bg-screen);
+}
+
+.keyboard{
+    min-width: 100%;
+    background-color: var(--clr-bg-keypad);
+    border-radius: 0.5rem;
+    padding-block: 1rem;
+    padding-inline-end: 1rem;
+    padding-inline-start: 1.4rem;
+}
+
+.container.active .keyboard{
+    background-color: var(--clr-tt-bg-keypad);
+}
+
+/*=======Components======*/
+.clear,
+.equals,
+.delete,
+.number,
+.operator {
+    cursor: pointer;
+    border: none;
+    padding-top: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 3px 0px 0px var(--clr-k-shadow);
+    text-align: center;
+}
+
+.container.active .number,
+.container.active .operator{
+    box-shadow: 0px 3px 0px 0px var(--clr-tt-k-shadow);
+}
+
+
+.delete,
+.number,
+.operator{
+    width: 88%;
+    min-height: 55px;
+}
+
+.clear,
+.equals{
+    width: 94%;
+}
+
+
+.clear{
+    grid-row: 5 / 5;
+    grid-column: 1 / span 2;
+    background-color: var(--clr-k-bg-spec);
+    box-shadow: 0px 3px 0px 0px var(--clr-k-shadow-spec);
+    
+}
+
+.container.active .clear{
+    background-color: var(--clr-tt-k-bg-spec);
+    box-shadow: 0px 3px 0px 0px var(--clr-tt-k-shadow-spec);
+}
+
+.equals{
+    grid-row: 5 / 5;
+    grid-column: 3 / span 2;
+    background-color: var(--clr-k-bg-toggle);
+    box-shadow: 0px 3px 0px 0px var(--clr-k-shadow-eq);
+}
+
+.container.active .equals{
+    background-color: var(--clr-tt-k-bg-toggle);
+    box-shadow: 0px 3px 0px 0px var(--clr-tt-k-shadow-eq);
+}
+
+.delete{
+    background-color: var(--clr-k-bg-spec);
+    box-shadow: 0px 3px 0px 0px var(--clr-k-shadow-spec);
+}
+
+.container.active .delete{
+    background-color: var(--clr-tt-k-bg-spec);
+    box-shadow: 0px 3px 0px 0px var(--clr-tt-k-shadow-spec);
+}
+
+.toggle-div{
+    position: relative;
+    display: block;
+    background-color: var(--clr-bg-keypad);
+    border-radius: 2rem;
+    width: 50px;
+    height: 25px;
+}
+
+.container.active .toggle-div{
+    background-color: var(--clr-tt-bg-keypad);
+}
+
+.toggler {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: var(--clr-k-bg-toggle);
+    transform: scale(0.8);
+    transition: 0.5s;
+}
+
+.container.active .toggler{
+    background-color: var(--clr-tt-k-bg-toggle);
+}
+
+
+.container.active .toggler {
+    left: 25px;
+    transition: 0.5s;
+}
+
+/*=======Active states=======*/
+.delete:hover,
+.clear:hover{
+    background-color: #a2b3e1;
+    transition: 0.5s;
+}
+
+.container.active .delete:hover,
+.container.active .clear:hover{
+    background-color: #62b5bd;
+    transition: 0.5s;
+}
+
+.equals:hover,
+.toggler:hover{
+    background-color: #f96c5b;
+    transition: 0.5s;
+}
+
+.container.active .equals:hover,
+.container.active .toggler:hover{
+    background-color: #ff8b38;
+    transition: 0.5s;
+}
+
+.number:hover,
+.operator:hover,
+.container.active .number:hover,
+.container.active .operator:hover{
+    background-color: #ffffff;
+    transition: 0.5s;
+
+}
+
+@media (min-width: 550px) {
+    .container{
+        width: 34.375rem;
+        height: 34.375rem;
+    }
+    body{
+        background-color: var(--clr-bg-main);
+    }
+
+    body:has(> .container.active) {
+        background-color: var(--clr-tt-bg-main);
+    }
+
+    .display{
+        min-height: 6.25rem;
+    }
+}
+
